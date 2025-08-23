@@ -1,0 +1,143 @@
+Prompt:
+
+You are an expert full-stack developer. Build a demo version of the KH University Portal using the following exact specifications. Do not recreate index.php because it already exists. Instead, create the demo login pages and demo dashboards, along with supporting files, exactly as described below.
+
+1) Scope of Work
+
+✅ Use the existing index.php (already created, do not regenerate).
+
+✅ Generate demo login pages:
+
+studentlogin.php
+
+facultylogin.php
+
+adminlogin.php
+
+✅ Generate demo dashboard pages:
+
+studentdashboard.php
+
+facultydashboard.php
+
+admindashboard.php
+
+✅ Provide shared CSS file → assets/css/common.css.
+
+✅ Provide demo DB integration code (PHP + MySQL).
+
+✅ Provide placeholders for images in assets/images/.
+
+✅ Provide session handling (session_start()).
+
+2) Tech Stack & Structure
+
+Frontend: HTML, CSS, JavaScript (no frameworks).
+
+Backend: PHP (simple procedural, no advanced security).
+
+Database: MySQL (DB name: scps).
+
+Assets:
+
+CSS → assets/css/common.css.
+
+Images → assets/images/collegebg.png, assets/images/Logo.jpg, assets/images/icons/....
+
+3) Database Schema
+
+students → roll_number, username, password, std_name, std_address, phone
+academics → roll_number, attendance_percentage, marks_percentage, backlogs, fee_due, marks
+faculty → employee_id, username, password, emp_name, department, emp_address, attendance, feedback_percentage, salary, classes_taken
+admins → username, password (plus dashboard fields TBD)
+
+4) Login Flow (Basic, No Roles)
+
+Each login page checks username and password against its table.
+
+If present → redirect to corresponding dashboard.
+
+If invalid → alert('Invalid login').
+
+Redirect example:
+
+header('Location: studentdashboard.php?login=success'); exit;
+
+
+Sessions:
+
+Student → $_SESSION['student'] = ['username','roll_number','std_name'];
+
+Faculty → $_SESSION['faculty'] = ['username','employee_id','emp_name'];
+
+Admin → $_SESSION['admin'] = ['username'];
+
+Guard:
+
+if (empty($_SESSION['student'])) { header('Location: index.php'); exit; }
+
+5) Demo Login Page UI
+
+Full background: collegebg.png.
+
+Center card with glass/blur effect.
+
+Round logo + “KH University”.
+
+Subtitle → “Student Login” / “Faculty Login” / “Admin Login”.
+
+Inputs: username + password (with eye toggle).
+
+Compact login button (hover bulge/zoom).
+
+Back arrow (history.back()).
+
+6) Demo Dashboard UI
+
+Header: Logo + University name (left), links (center), Logout (right).
+
+Sidebar: Menu items (differs per role).
+
+Main Body:
+
+Details bar → Welcome text + data from DB.
+
+Tracking cards (grid of 4).
+
+Student → values from students + academics.
+
+Faculty → values from faculty.
+
+Admin → #students, #faculty, #reports, #books.
+
+Footer: SCPS description + modules.
+
+7) Styling
+
+Font: Inter or Poppins.
+
+Soft gradients (pink/gray/sky blue).
+
+Sidebar/menu hover effects.
+
+Card hover zoom.
+
+Footer dark contrast text.
+
+8) Interactions
+
+JS: password eye toggle, back arrow, sidebar hover active states.
+
+Alerts for invalid login.
+
+Success popup if ?login=success.
+
+9) Code Quality
+
+session_start() in every PHP file.
+
+Use prepared statements for DB queries.
+
+Keep CSS in assets/css/common.css.
+
+Only basic login validation → no advanced role/security system.
